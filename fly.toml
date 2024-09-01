@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for billys-bedrock-server on 2024-09-01T13:45:28-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'billys-bedrock-server'
+primary_region = 'ord'
+
+[env]
+  VERSION="LATEST"
+  EULA="TRUE"
+  SERVER_PORT = 12345
+
+[[mounts]]
+  source = 'data'
+  destination = '/data'
+
+[[services]]
+  internal_port = 19132
+  protocol = "udp"
+  processes = ['app']
+
+  [[services.ports]]
+    port = 19132
+
+[[vm]]
+  memory = '4gb'
+  cpu_kind = 'shared'
+  cpus = 2
